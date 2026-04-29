@@ -43,6 +43,7 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
+
 # ── Subscriber store ──────────────────────────────────────────────────────────
 
 def load_subscribers() -> set[int]:
@@ -56,6 +57,7 @@ def save_subscribers(subs: set[int]):
 
 
 subscribers: set[int] = load_subscribers()
+
 
 # ── Telegram handlers ─────────────────────────────────────────────────────────
 
