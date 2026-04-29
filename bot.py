@@ -129,7 +129,7 @@ class Handler(BaseHTTPRequestHandler):
 
         try:
             data = json.loads(body)
-            message = data.get("message", "").strip()
+            message = str(data.get("message", "")).strip()
         except json.JSONDecodeError:
             self._respond(400, "Invalid JSON")
             return
