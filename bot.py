@@ -23,6 +23,7 @@ from threading import Thread
 
 from dotenv import load_dotenv
 from telegram import Update
+from telegram.error import Forbidden, ChatMigrated
 from telegram.ext import Application, CommandHandler, ContextTypes
 
 # ── Config ────────────────────────────────────────────────────────────────────
@@ -100,9 +101,11 @@ def broadcast_sync(message: str):
         for chat_id in list(subscribers):
             try:
                 await _app.bot.send_message(chat_id=chat_id, text=message)
-            except Exception as e:
-                log.warning(f"Failed to send to {chat_id}: {e} — removing")
+            except (Forbidden, ChatMigrated) as e:
+                log.warning(f"Removing unreachable subscriber {chat_id}: {e}")
                 dead.add(chat_id)
+            except Exception as e:
+                log.warning(f"Failed to send to {chat_id}: {e}")
         if dead:
             subscribers.difference_update(dead)
             save_subscribers(subscribers)
