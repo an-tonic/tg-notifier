@@ -12,9 +12,10 @@ if [ ! -f "$DIR/.env" ]; then
 fi
 
 # ── 2. venv + deps ────────────────────────────────────────────────────────────
+apt-get install -y python3-venv python3-pip > /dev/null
+rm -rf "$DIR/venv"
 python3 -m venv "$DIR/venv"
 "$DIR/venv/bin/pip" install --quiet -r "$DIR/requirements.txt"
-
 # ── 3. systemd service ───────────────────────────────────────────────────────
 # ─
 cat > "$SERVICE_FILE" <<EOF
