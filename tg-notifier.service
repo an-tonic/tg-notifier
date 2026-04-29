@@ -1,0 +1,15 @@
+[Unit]
+Description=Telegram Notifier Bot
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/tg-notifier
+ExecStart=/opt/tg-notifier/venv/bin/python bot.py
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
