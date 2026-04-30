@@ -40,4 +40,7 @@ systemctl daemon-reload
 systemctl enable tg-notifier
 systemctl restart tg-notifier
 
+# ── 4. install tg_log system-wide ────────────────────────────────────────────
+pip install -e "$DIR" --break-system-packages
+
 echo "✅ Done. Logs: sudo journalctl -u tg-notifier -f"

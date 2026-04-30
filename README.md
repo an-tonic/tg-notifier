@@ -41,7 +41,7 @@ Anyone on the team can do this — they'll all receive broadcasts.
 Copy `tg_log.py` next to your script (or into a shared utils folder), then:
 
 ```python
-from sample_usage import log_to_tg
+from tg_log import log_to_tg
 
 log_to_tg("✅ Cycle complete")
 log_to_tg("⚠️ Capital limit exceeded — stopping")
