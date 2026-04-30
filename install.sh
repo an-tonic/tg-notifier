@@ -13,9 +13,9 @@ fi
 
 # ── 2. venv + deps ────────────────────────────────────────────────────────────
 apt-get install -y python3-venv python3-pip > /dev/null
-rm -rf "$DIR/venv"
+rm -rf "$DIR/.venv"
 python3 -m venv "$DIR/.venv"
-"$DIR/venv/bin/pip" install --quiet -r "$DIR/requirements.txt"
+"$DIR/.venv/bin/pip" install --quiet -r "$DIR/requirements.txt"
 # ── 3. systemd service ───────────────────────────────────────────────────────
 # ─
 cat > "$SERVICE_FILE" <<EOF
@@ -26,7 +26,7 @@ After=network.target
 [Service]
 Type=simple
 WorkingDirectory=$DIR
-ExecStart=$DIR/venv/bin/python bot.py
+ExecStart=$DIR/.venv/bin/python bot.py
 Restart=on-failure
 RestartSec=5
 StandardOutput=journal
